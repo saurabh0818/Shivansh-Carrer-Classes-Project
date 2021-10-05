@@ -1,0 +1,72 @@
+{% extends 'login/basepdf.html' %}
+{% load static %}
+
+
+{% block body %}
+
+
+
+<br>
+<br>
+<br>
+<h2 class="sub">INVOICE NAME : TEACHERS PAYMENT REPORT</h2>
+<h6 class=" inner-data"> From : {{fromm}} - To : {{tooo}}</h6>
+<table border="0" cellspacing="0" cellpadding="0">
+    <thead>
+        <tr class="header">
+            <th>#</th>
+            <th>FIRST NAME</th>
+            <th>LAST NAME</th>
+            <th>SUBJECT</th>
+            <th>DATE</th>
+            <th>TYPE</th>
+            <th>AMOUNT</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        </tr>
+
+        {% for x in data%}
+        <tr class="data">
+            <td class="inner-data">{{forloop.counter}}</td>
+            <td class="inner-data">{{x.Teacher.fname}}</td>
+            <td class="inner-data">{{x.Teacher.lname}}</td>
+            <td class="inner-data">{{x.Teacher.sub}}</td>
+            <td class="inner-data">{{x.date}}</td>
+            <td class="inner-data">{{x.payment_type}}</td>
+            <td class="inner-data">{{x.amount}}</td>
+
+        </tr>
+        {% endfor %}
+
+
+
+
+    </tbody>
+    <tfoot>
+        <tr>
+
+        </tr>
+        <tr class="border">
+            <td colspan="5"></td>
+            <td colspan="1" class="total">SUBTOTAL</td>
+            <td colspan="1" class="total">{{total}}</td>
+
+        </tr>
+        <tr>
+            <td colspan="5"></td>
+            <td colspan="1" class="total">TAX 0 %</td>
+            <td colspan="1" class="total">00</td>
+        </tr>
+        <tr>
+            <td colspan="5"></td>
+            <td colspan="1" class="total1">GRAND TOTAL</td>
+            <td colspan="1" class="total1">{{total}}</td>
+
+        </tr>
+    </tfoot>
+</table>
+
+{% endblock %}

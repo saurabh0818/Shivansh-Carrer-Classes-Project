@@ -1,0 +1,61 @@
+{% extends "login/mainlogin.html" %}
+{% block body %}
+<div class="container">
+
+
+
+
+    <div class="card bg-info my-5">
+        {% if messages %}
+        {% for msg in messages %}
+
+
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" id="msg">
+            <strong>Alert : </strong> <b>{{msg}}</b>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+
+        {% endfor %}
+
+        {% endif %}
+        <article class="card-body mx-auto" style="max-width: 400px;">
+
+            <div class="card shadow" style="width: 18rem;">
+                <img class="card-img-top"
+                    src="https://images.unsplash.com/photo-1529539795054-3c162aab037a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                    alt="Card image cap">
+                <div class="card-body">
+
+                    <form method="POST" action="{% url 'login' %}">{% csrf_token %}
+                        <div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                            </div>
+                            <input name="username" class="form-control" placeholder="User Name" type="text" required>
+                        </div> <!-- form-group// -->
+
+                        <div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                            </div>
+                            <input name="password" class="form-control" placeholder="Enter Your Password"
+                                type="password" required>
+                        </div> <!-- form-group// -->
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-block"> Login </button>
+                        </div> <!-- form-group// -->
+                        <p class="text-center">Don't Have an account? <a href="register">Register Here</a> </p>
+                    </form>
+                </div>
+            </div>
+        </article>
+    </div> <!-- card.// -->
+
+</div>
+<!--container end.//-->
+
+
+{% endblock %}

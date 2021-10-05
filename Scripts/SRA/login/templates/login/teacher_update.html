@@ -1,0 +1,33 @@
+{% extends "login/main.html" %}
+
+{% block active_home %} active {% endblock %}
+
+{% block body %}
+{% load crispy_forms_tags %}
+<form action="" method="POST">{% csrf_token %}
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-3">
+
+            </div>
+            <div class="col-lg-6">
+                <div class="card" style="width: 30rem;">
+                    <div class="card-body">
+                        {{teachers|crispy}}
+                        <a class="btn btn-warning" href="{% url 'teacher' %}" role="button">Cancel</a>
+                        <input class="btn btn-success float-right" type="submit" value="Update">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+{% endblock %}

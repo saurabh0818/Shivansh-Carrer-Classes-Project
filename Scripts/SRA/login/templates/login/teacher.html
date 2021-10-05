@@ -1,0 +1,187 @@
+{% extends "login/main.html" %}
+
+{% block active_teacher %} active {% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">TEACHER WHO IS NOT
+                                ACTIVE
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{inactive}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-times fa-2x text-danger"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">TEACHER WHO IS ACTIVE
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ active }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-check fa-2x text-success"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"> TOTAL
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{total}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-users fa-2x text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <div class="card-body">
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header bg-info py-3">
+                <h3 class=" mb-2  text-white"><i class="fas fa-chalkboard-teacher"></i> Add Teacher</h3>
+            </div>
+            {% if messages %}
+            {% for msg in messages %}
+
+
+            <div class="alert alert-info alert-dismissible fade show" role="alert" id="msg">
+                <strong>Alert : </strong> <b>{{msg}}</b>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+
+            {% endfor %}
+
+            {% endif %}
+            <div class="card mx-3 my-5">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark active" data-toggle="tab" href="#new"><strong>Add
+                                    Teacher</strong></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" data-toggle="tab" href="#view"><strong>View
+                                    Teacher</strong></a>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class="tab-content card-body shadow">
+
+                    <!-------------------- Insert Expenditure  -------------------->
+                    {% load crispy_forms_tags %}
+
+                    <div id="new" class="tab-pane  active">
+                        <div class="row ">
+                            <div class="col-lg-3">
+
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card shadow">
+                                    <div class="card-body shadow">
+                                        <form target="" method="POST">{% csrf_token %}
+                                            {{teacher_module|crispy}}
+                                            <br>
+                                            <a href="" class="btn btn-danger float-right ml-3 shadow">Clear</a>
+                                            <input class="btn btn-primary float-right shadow" type="submit"
+                                                value="Submit">
+                                        </form>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div id="view" class="tab-pane">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Subject</th>
+                                        <th>Qualification</th>
+                                        <th>Join Date</th>
+                                        <th>Date Created</th>
+                                        <th>Active</th>
+                                        <th>Update</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for x in teacher %}
+                                    <tr>
+                                        <td>{{x.fname}}</td>
+                                        <td>{{x.lname}}</td>
+                                        <td>{{x.sub}}</td>
+                                        <td>{{x.qual}}</td>
+                                        <td>{{x.join_date}}</td>
+                                        <td>{{x.date_created}}</td>
+                                        {% if x.active == "Active" %}
+                                        <td>✔</td>
+                                        {% else %}
+                                        <td>❌</td>
+                                        {% endif %}
+                                        <td class="text-center"><a class="btn btn-info shadow "
+                                                href="{%  url 'teacher_update' x.id %}" role="button"><i
+                                                    class="fas fa-edit"></i></a></td>
+                                        <td class="text-center"><a class="btn btn-danger shadow"
+                                                href="{%  url 'teacher_delet' x.id %}" role="button"><i
+                                                    class="fas fa-trash-alt"></i></a></td>
+                                    </tr>
+                                    {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

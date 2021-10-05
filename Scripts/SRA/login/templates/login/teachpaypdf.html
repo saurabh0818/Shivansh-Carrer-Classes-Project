@@ -1,0 +1,64 @@
+{% extends 'login/basepdf.html' %}
+{% load static %}
+
+
+{% block body %}
+
+
+
+<br>
+<br>
+<br>
+<h2 class="sub">INVOICE NAME : TEACHER PAYMENT</h2>
+<table border="0" cellspacing="0" cellpadding="0">
+    <thead>
+        <tr class="header">
+            <th>#</th>
+            <th>NAME</th>
+            <th>TYPE</th>
+            <th>DATE</th>
+            <th>AMOUNT</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        </tr>
+
+        <tr class="data">
+            <td class="inner-data">1</td>
+            <td class="inner-data">{{data.Teacher.fname}}</td>
+            <td class="inner-data">{{data.payment_type}}</td>
+            <td class="inner-data">{{data.date}}</td>
+            <td class="inner-data">{{data.amount}}</td>
+
+        </tr>
+
+
+
+
+    </tbody>
+    <tfoot>
+        <tr>
+
+        </tr>
+        <tr class="border">
+            <td colspan="3"></td>
+            <td colspan="1" class="total">SUBTOTAL</td>
+            <td class="total">{{data.amount}}</td>
+        </tr>
+        <tr>
+            <td colspan="3"></td>
+            <td colspan="1" class="total">TAX 25%</td>
+            <td class="total">00</td>
+        </tr>
+        <tr>
+            <td colspan="3"></td>
+            <td colspan="1" class="total1">GRAND TOTAL</td>
+            <td class="total1">{{data.amount}}</td>
+        </tr>
+    </tfoot>
+</table>
+
+{% endblock %}

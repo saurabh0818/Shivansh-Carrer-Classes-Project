@@ -1,0 +1,190 @@
+{% extends "login/main.html" %}
+
+{% block active_teacher %} active {% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">CURRENT MONTH PAYMENT IN
+                                CASH
+
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">₹ {{cash_total}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-wallet fa-2x text-info"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">CURRENT MONTH PAYMENT
+                                WITH CHEQUE
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">₹ {{ cheque_total }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-money-check-alt fa-2x text-success"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"> TOTAL PAYMENT IN
+                                CURRENT MONTH
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">₹ {{cash_total|add:cheque_total}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-funnel-dollar fa-2x text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <div class="card-body">
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header bg-info py-3">
+                <h3 class=" mb-2 text-white"><i class="fas fa-chalkboard-teacher"></i> Add Teachers Payment
+                </h3>
+            </div>
+            {% if messages %}
+            {% for msg in messages %}
+
+
+            <div class="alert alert-info alert-dismissible fade show" role="alert" id="msg">
+                <strong>Alert : </strong> <b>{{msg}}</b>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+
+            {% endfor %}
+
+            {% endif %}
+            <div class="card mx-3 my-5">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark active" data-toggle="tab" href="#new"><strong>Add
+                                    Payment</strong></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" data-toggle="tab" href="#view"><strong>View
+                                    Payment</strong></a>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class="tab-content card-body shadow">
+
+                    <!-------------------- Insert Expenditure  -------------------->
+                    {% load crispy_forms_tags %}
+
+                    <div id="new" class="tab-pane  active">
+                        <div class="row ">
+                            <div class="col-lg-3">
+
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card shadow">
+                                    <div class="card-body shadow">
+                                        <form target="" method="POST">{% csrf_token %}
+                                            {{teacher_feild|crispy}}
+                                            <br>
+                                            <a href="" class="btn btn-danger float-right ml-3 shadow">Clear</a>
+                                            <input class="btn btn-primary float-right shadow" type="submit"
+                                                value="Submit">
+                                        </form>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div id="view" class="tab-pane">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Teachers Name</th>
+                                        <th>Payment Type</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                        <th>Update</th>
+                                        <th>Delete</th>
+                                        <th>Report</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for x in teach_pay %}
+                                    <tr>
+                                        <td>{{x.Teacher}}</td>
+                                        <td>{{x.payment_type}}</td>
+                                        <td>{{x.amount}}</td>
+                                        <td>{{x.date}}</td>
+
+                                        <td class="text-center"><a class="btn btn-info shadow"
+                                                href="{%  url 'teacher_pay_update' x.id %}" role="button"><i
+                                                    class="fas fa-edit"></i></a>
+                                        </td>
+                                        <td class="text-center"><a class="btn btn-danger shadow"
+                                                href="{%  url 'teacher_pay_delete' x.id %}" role="button"><i
+                                                    class="fas fa-trash-alt"></i></a>
+                                        </td>
+                                        <td class="text-center"><a class="btn btn-success shadow"
+                                                href="{%  url 'dataprintteach' x.id %}" role="button"><i
+                                                    class="fas fa-download text-white"></i></a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

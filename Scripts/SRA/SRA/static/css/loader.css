@@ -1,0 +1,74 @@
+*, html,body{
+    padding:0px;
+    margin:0px;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+::selection{
+    background-color:#2d98da;
+    color:#fff;
+}
+body{
+    background-color:#292929;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    min-height:100vh;
+}
+.Box{
+    position:relative;
+    width:100px;
+    height:100px;
+    transform-style:preserve-3d;
+    transform-origin:center;
+    transform:rotate(45deg);
+    animation:Loading 1s linear infinite;
+}
+.Box span{
+    position:absolute;
+    width:50px;
+    height:50px;
+    animation:MyLoading 1s ease-in-out infinite;
+}
+.Box span:first-of-type{
+    left:0px;
+    top:0px;
+    background:#eb3b5a;
+}
+.Box span:nth-of-type(2){
+    right:0px;
+    top:0px;
+    background:#0fb9b1;
+}
+.Box span:nth-of-type(3){
+    left:0px;
+    bottom:0px;
+    background:#e1b12c;
+}
+.Box span:last-of-type{
+    right:0px;
+    bottom:0px;
+    background:#227093;
+}
+
+@keyframes Loading{
+    0%,90% ,100%{
+        width:100px;
+        height:100px;
+    }
+    50%{
+        width:150px;
+        height:150px;   
+    }
+}
+
+
+@keyframes MyLoading{
+    0%{
+        transform:rotate(0deg);
+    }
+    100%{
+        transform:rotate(90deg);
+    }
+}

@@ -1,0 +1,68 @@
+{% extends 'login/basepdf.html' %}
+{% load static %}
+
+
+{% block body %}
+
+
+
+<br>
+<br>
+<br>
+<h2 class="sub">INVOICE NAME : STUDENT FEES</h2>
+<table border="0" cellspacing="0" cellpadding="0">
+    <thead>
+        <tr class="header">
+            <th>#</th>
+            <th>FIRST NAME</th>
+            <th>LAST NAME</th>
+            <th>STANDARD</th>
+            <th>DATE</th>
+            <th>TYPE</th>
+            <th>FEES PAID</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        </tr>
+
+        <tr class="data">
+            <td class="inner-data">1</td>
+            <td class="inner-data">{{data.Student.first_name}}</td>
+            <td class="inner-data">{{data.Student.last_name}}</td>
+            <td class="inner-data">{{data.Student.standard}}</td>
+            <td class="inner-data">{{data.date}}</td>
+            <td class="inner-data">{{data.payment_type}}</td>
+            <td class="inner-data">{{data.amount}}</td>
+
+        </tr>
+
+
+
+
+    </tbody>
+    <tfoot>
+        <tr>
+
+        </tr>
+        <tr class="border">
+            <td colspan="4"></td>
+            <td colspan="2" class="total">SUBTOTAL</td>
+            <td class="total">{{data.amount}}</td>
+        </tr>
+        <tr>
+            <td colspan="4"></td>
+            <td colspan="2" class="total">TAX 25%</td>
+            <td class="total">00</td>
+        </tr>
+        <tr>
+            <td colspan="4"></td>
+            <td colspan="2" class="total1">GRAND TOTAL</td>
+            <td class="total1">{{data.amount}}</td>
+        </tr>
+    </tfoot>
+</table>
+
+{% endblock %}

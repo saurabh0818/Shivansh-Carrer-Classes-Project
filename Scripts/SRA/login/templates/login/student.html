@@ -1,0 +1,198 @@
+{% extends "login/main.html" %}
+
+{% block link %}
+
+
+{% endblock %}
+
+{% block active_student %} active {% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">TOTAL STUDENT
+
+                            </div>
+                            <div class="h4 mb-0 font-weight-bold text-gray-800"> {{stu_count}} </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-user-graduate fa-3x text-info"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">STUDENT FEES UNDER
+                                TEN THOUSAND
+                            </div>
+                            <div class="h4 mb-0 font-weight-bold text-gray-800"> {{fee_under_seven}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-less-than-equal fa-3x text-success"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"> STUDENT FEES ABOVE
+                                TEN THOUSAND
+                            </div>
+                            <div class="h4 mb-0 font-weight-bold text-gray-800">{{gte}} </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-greater-than-equal fa-3x text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-info">
+            <h3 class=" mb-2 text-white"><i class="fas fa-graduation-cap"></i> Student Details</h3>
+        </div>
+        {% if messages %}
+        {% for msg in messages %}
+
+
+        <div class="alert alert-info alert-dismissible fade show" role="alert" id="msg">
+            <i class="fas fa-flag fa-1x text-success"></i><strong> Note : </strong> <b>{{msg}}</b>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+
+        {% endfor %}
+
+        {% endif %}
+        <div class="card mx-3 my-5">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active text-dark" data-toggle="tab" href="#new"><strong>Add New Students
+                            </strong></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" data-toggle="tab" href="#view"><strong>Update / Delete
+                                Students</strong> </a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <!-- Page Heading -->
+
+            <!-- DataTales Example -->
+
+            <div class="tab-content card-body shadow">
+
+                <!-------------------- Insert Expenditure  -------------------->
+                {% load crispy_forms_tags %}
+
+                <div id="new" class="tab-pane  active">
+                    <div class="row ">
+                        <div class="col-lg-3">
+
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card shadow">
+                                <div class="card-body shadow">
+                                    <form target="" method="POST">{% csrf_token %}
+                                        {{Student_module|crispy}}
+                                        <br>
+                                        <a href="" class="btn btn-danger float-right ml-3 shadow">Clear</a>
+                                        <input class="btn btn-primary float-right shadow" type="submit" value="Submit">
+                                    </form>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="view" class="tab-pane">
+                    <div class="table-responsive ">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Mobile</th>
+                                    <th>Email</th>
+                                    <th>Standard</th>
+                                    <th>Division</th>
+                                    <th>Total Fees</th>
+                                    <th>Update</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for x in student %}
+                                <tr>
+                                    <td>{{x.first_name}}</td>
+                                    <td>{{x.last_name}}</td>
+                                    <td>{{x.mobile}}</td>
+                                    <td>{{x.email}}</td>
+                                    <td>{{x.standard}}</td>
+                                    <td>{{x.divison}}</td>
+                                    <td>{{x.fee_per_month}}</td>
+                                    <td class="text-center"><a class="btn btn-info shadow"
+                                            href="{%  url 'student_update' x.id %}" role="button"><i
+                                                class="fas fa-edit"></i></a></td>
+                                    <td class="text-center"><a class="btn btn-danger shadow"
+                                            href="{%  url 'student_delete' x.id %}" role="button"><i
+                                                class="fas fa-trash-alt"></i></a></td>
+                                </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+    </div>
+
+
+    {% endblock %}
+
+    {% block js %} {% endblock %}

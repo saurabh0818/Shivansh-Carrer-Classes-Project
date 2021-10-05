@@ -1,0 +1,33 @@
+{% extends "login/main.html" %}
+
+{% block active_home %} active {% endblock %}
+
+{% block body %}
+
+<form action="{% url 'teacher_pay_delete' teachers_pay.id %}" method="POST">{% csrf_token %}
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-4">
+            </div>
+            <div class="col-lg-4">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <p>Are you Sure to Want to Delete <b>{{teachers_pay.Teacher.fname|upper}}</b> ?</p>
+                        <a class="btn btn-warning" href="{% url 'teacher_pay' %}" role="button">Cancel</a>
+                        <input class="btn btn-success float-right" type="submit" value="Delete">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+{% endblock %}

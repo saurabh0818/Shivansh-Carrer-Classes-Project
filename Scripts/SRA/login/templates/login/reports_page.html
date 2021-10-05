@@ -1,0 +1,92 @@
+{% extends "login/main.html" %}
+
+{% block active_reports %} active {% endblock %}
+
+{% block body %}
+{% load static %}
+
+
+<!-- Page Heading -->
+
+
+<!-- Content Row -->
+<div class="container-fluid">
+
+    <div class="card shadow mb-4">
+        <div class="card-header bg-info py-3">
+            <h3 class=" mb-2  text-white"><i class="fas fa-rupee-sign"></i> Find Reports</h3>
+        </div>
+        <div class="card-body">
+            <div class="row my-4">
+
+                <div class="col-md-4">
+
+                    <div class="card shadow mb-3">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Student Fee</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-center">
+                                <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
+                                    src="{% static 'svg/student.png' %}" alt="">
+                            </div>
+                            <a type="button" href="{% url 'student_report' %}"
+                                class="btn btn-primary float-right btn-lg btn-block text-white">Generate
+                                Report</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <div class="card shadow mb-3 ">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Teachers Payment</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-center">
+                                <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
+                                    src="{% static 'svg/teacher.png' %}" alt="">
+                            </div>
+
+                            <a type="button" href="{% url 'teachers_report'%}"
+                                class="btn btn-primary float-right btn-lg btn-block text-white">Generate
+                                Report</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <div class="card shadow mb-3 ">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Expenditure</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-center">
+                                <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
+                                    src="{% static 'svg/money.png' %}" alt="">
+                            </div>
+
+                            <a type="button" href="{% url 'expenditure_report' %}"
+                                class="btn btn-primary float-right btn-lg btn-block text-white">Generate
+                                Report</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<br>
+
+<!-- Dashboard Reports -->
+
+
+{% endblock %}

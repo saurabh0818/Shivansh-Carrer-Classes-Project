@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convert Pdf</title>
+    <link href="{% static 'css/design.css' %}" rel="stylesheet" id="bootstrap-css">
+
+
+    {% block css%}
+
+    {% endblock%}
+
+    <style>
+        .img {
+            display: block;
+            margin-left: 220px;
+
+        }
+
+        .left {
+
+            text-align: left;
+            font-size: large;
+
+
+        }
+
+        .right {
+
+            text-align: right;
+            font-size: large;
+
+
+
+        }
+
+        .add {
+
+            font-size: large;
+
+        }
+
+        .header {
+            background-color: orangered;
+            padding-top: 5px;
+            color: white;
+            font-size: 12px;
+        }
+
+        .total {
+
+            padding-top: 5px;
+            padding-left: 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 13px;
+
+        }
+
+        .total1 {
+
+            padding-top: 5px;
+            padding-left: 10px;
+            text-align: center;
+            background-color: orangered;
+            font-weight: bold;
+            color: white;
+            font-size: 13px;
+
+        }
+
+        .border {
+            padding-top: 5px;
+            border-top: double black;
+
+        }
+
+        .inner-data {
+
+            text-align: center;
+            font-size: large;
+        }
+
+        .thanks {
+            padding-top: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 12px;
+
+
+        }
+
+        .gap {
+
+            margin-bottom: 100px;
+        }
+
+        .data {
+            padding-bottom: 8px;
+        }
+
+        .bussiness {
+            text-align: center;
+            font-size: 200%;
+            color: orangered;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        .sub {
+            text-align: center;
+            font-size: 200%;
+            color: black;
+
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <img src="../static/images/logossr.png" alt="" class="img">
+    </div>
+    <hr>
+    <br>
+    <table>
+        <tr>
+            <th class="left"> Head-Office Address :<br>SSR ACEDEMY </th>
+            <th class="right">Date & Time of Invoice</th>
+
+        </tr>
+        <tr>
+            <td class="left">
+
+                <div>Near Vradhman Hospital</div>
+                <div>Silvassa Char Rasta, Raroli Rd</div>
+                <div>Dadra & Nagar Haveli - 396230</div>
+                <div>Phone : 8160550709 , 9374450481</div>
+            </td>
+            <td class="right">
+                <div>Date : {{crrnt_date}} </div>
+
+                {% if hr > '12' %}
+                <div>Time : {{current_time}} PM </div>
+                {% else %}
+                <div>Time : {{current_time}} AM </div>
+                {% endif %}
+
+                <div> &nbsp;</div>
+                <div>&nbsp;</div>
+            </td>
+
+        </tr>
+    </table>
+    <div class="left">
+        <h1></h1>
+        <Address class="add">
+
+
+        </Address>
+
+    </div>
+
+
+
+    {% block body %}
+
+
+    {% endblock%}
+
+
+
+    <div class="gap">
+        <p>&nbsp; </p>
+        <p>&nbsp; </p>
+        <p>&nbsp; </p>
+        <p>&nbsp; </p>
+        <p>&nbsp; </p>
+    </div>
+
+    <div class="bussiness">Thank You for doing Bussiness with Us !!</div>
+
+
+    <footer class="thanks">
+        Note: Invoice was created on a computer and is valid without the signature and seal.
+    </footer>
+
+    <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
+    <div></div>
+
+</body>
+
+</html>
