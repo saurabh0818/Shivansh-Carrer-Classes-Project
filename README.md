@@ -1,4 +1,4 @@
-# All_Quotes
+# SSR Acedemy
 This repository contains a web application developed using Django and Python tailored for managing coaching classes efficiently. The application offers a comprehensive set of features including report generation, dashboard functionality, expenditure tracking, and more to streamline the operations of coaching classes.
 <br>
 # Features
